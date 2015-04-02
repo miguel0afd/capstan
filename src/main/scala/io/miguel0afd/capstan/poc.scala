@@ -18,8 +18,25 @@
 
 package io.miguel0afd.capstan
 
+import org.apache.flink.api.scala._
+
 object poc {
   def main(args: Array[String]): Unit = {
-    println("Proof Of Concept")
+    println("----------------")
+    println("PROOF OF CONCEPT")
+    println("----------------")
+    assert(args.length > 0, "Input file is expected")
+    val path = args(0)
+    //https://data.consumerfinance.gov/api/views/x94z-ydhh/rows.csv
+    println("Reading file " + path.substring(path.lastIndexOf("/")+1))
+    val env = ExecutionEnvironment.getExecutionEnvironment
+    val text = env.readCsvFile[(Int, String, String, String, String)](
+      path,
+      fieldDelimiter = ",",
+      ignoreFirstLine = true,
+      includedFields = Array(0, 1, 3, 5, 8))
+    val result = text.filter(x => (x._1 > 1299608 && x._4 == "NY"))
+    println("RESULT: " + result.count)
+    print(result.collect.foreach( println ))
   }
 }
