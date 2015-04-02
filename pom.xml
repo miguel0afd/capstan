@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.miguel0afd.capstan</groupId>
+    <artifactId>capstan</artifactId>
+    <packaging>pom</packaging>
+    <version>0.1-SNAPSHOT</version>
+    <name>Capstan project</name>
+    <description>Capstan project using Apache Flink</description>
+    <url>http://github.com/miguel0afd/capstan</url>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0t</url>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>scm:git:git@github.com:miguel0afd/capstan.git</url>
+        <connection>https://github.com/miguel0afd/capstan/</connection>
+    </scm>
+
+    <developers>
+        <developer>
+            <id>miguel0afd</id>
+            <name>Miguel Angel Fernandez</name>
+            <email>miguel83fz at gmail dot com</email>
+        </developer>
+    </developers>
+
+    <properties>
+        <flink.version>0.9-SNAPSHOT</flink.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-scala</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
+    </dependencies>
+
+</project>
