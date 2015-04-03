@@ -20,11 +20,11 @@ package io.miguel0afd.capstan
 
 import org.apache.flink.api.scala._
 
-object poc {
+object analyzer {
   def main(args: Array[String]): Unit = {
-    println("----------------")
-    println("PROOF OF CONCEPT")
-    println("----------------")
+    println("---------------------------")
+    println("PROOF OF CONCEPT - ANALYZER")
+    println("---------------------------")
     assert(args.length > 0, "Input file is expected")
     val path = args(0)
     //https://data.consumerfinance.gov/api/views/x94z-ydhh/rows.csv
