@@ -1,2 +1,3 @@
-capstan
+Capstan
 =======
+Project based on Apache Flink
