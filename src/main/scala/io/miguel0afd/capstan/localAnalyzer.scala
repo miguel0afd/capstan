@@ -20,10 +20,10 @@ package io.miguel0afd.capstan
 
 import org.apache.flink.api.scala._
 
-object analyzer {
+object localAnalyzer {
   def main(args: Array[String]): Unit = {
     println("---------------------------")
-    println("PROOF OF CONCEPT - ANALYZER")
+    println("PROOF OF CONCEPT - LOCAL ANALYZER")
     println("---------------------------")
     assert(args.length > 0, "Input file is expected")
     val path = args(0)

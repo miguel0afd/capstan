@@ -18,24 +18,35 @@
 
 package io.miguel0afd.capstan
 
-import org.apache.flink.api.scala.ExecutionEnvironment
-import org.apache.hadoop.mapreduce.Job
-import org.apache.hadoop.mapreduce.lib.input.FileInputFormat
+import java.io.{FileInputStream, BufferedInputStream, File}
 
-object writer {
+import org.apache.hadoop.conf.Configuration
+import org.apache.hadoop.fs.{FileSystem, Path}
+
+object hdfsWriter {
   def main(args: Array[String]): Unit = {
     println("-------------------------")
-    println("PROOF OF CONCEPT - WRITER")
+    println("PROOF OF CONCEPT - HDFS WRITER")
     println("-------------------------")
-    assert(args.length > 0, "Input file is expected")
-    val path = args(0)
+    assert(args.length > 1, "Usage: hdfsWriter <path> <name_node>")
     //https://data.consumerfinance.gov/api/views/x94z-ydhh/rows.csv
-    println("Reading file " + path.substring(path.lastIndexOf("/")+1))
-    val env = ExecutionEnvironment.getExecutionEnvironment
-    val mapredInputFormat: FileInputFormat[K, V]
-    val key: Class[K]
-    val value: Class[V]
-    val job: Job
-    val result = env.createHadoopInput(mapredInputFormat, key, value, job)
+    val path = args(0)
+    val nameNode = args(1)
+    println("Writing file " + path.substring(path.lastIndexOf("/")+1) + " on " + nameNode)
+
+    val configuration = new Configuration
+    configuration.set("fs.defaultFS", nameNode)
+    val fs = FileSystem.get(configuration);
+    val os = fs.create(new Path(path))
+    val file = new File(path)
+    val in = new BufferedInputStream(new FileInputStream(file))
+    val b = new Array[Byte](1024)
+    var numBytes = in.read(b)
+    while (numBytes > 0) {
+      os.write(b, 0, numBytes)
+      numBytes = in.read(b)
+    }
+    in.close()
+    fs.close()
   }
 }
